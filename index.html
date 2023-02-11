@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation</title>
+    <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <header>
+      <h1>Register</h1>
+   <p>Please fill the form</p>
+   </header>
+   <hr>
+   <form action=""></form>
+ <div id="wrapper">
+   <div id="successMessage">Congratulations! Your registration was sucessful.</div>
+   <div id="errorMessage"></div>
+   <div class="form-element">
+      <label for="Fn">First name:</label>
+      <input type="text" id="firstName" placeholder="first name">
+   </div>
+   <div>
+      <label for="Ln">Last Name:</label>
+      <input type="text" id="lastName" placeholder="lastName">
+   </div>
+ <div class="form-element">
+    <label for="email">Email:</label>
+    <input type="text" name="email" id="email" placeholder="eg. yourname@gmail.com">
+ </div>
+ <div class="form-element">
+    <label for="phone">Telephone:</label>
+    <input type="text" name="phone" id="phone" placeholder="07012345678">
+ </div>
+ <div class="form-element">
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" placeholder="password">
+ </div>
+ <div class="form-element">
+    <label for="confirmpassword">Confirm Password:</label>
+    <input type="password" name="passwordconfirm" id="passwordConfirm" placeholder="confirm password">
+ </div>
+ <hr>
+ <div class="form-element">
+ <input type="submit" value="Sign Up" id="submitButton">
+ <input type="button" value="Reset" id="reset">
+ </div>
+ </div>
+ </form>
+    <script type="text/javascript">
+     function isEmail(email) {
+  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  return regex.test(email);
+}
+$("#submitButton").click(function(){
+   var errorMessage = "";
+   var fieldsMissing = "";
+
+   if($("#firstName").val() == ""){
+      fieldsMissing += "<br>First Name";
+   }
+   if($("#lastName").val() == ""){
+      fieldsMissing +="<br>Last Name";
+   }
+   if ($("#email").val() == "") {
+      fieldsMissing += "<br>Email";
+   }
+   if ($("#phone").val() == "") {
+      fieldsMissing += "<br>Telephone";
+   }
+   if ($("#password").val() == "") {
+      fieldsMissing += "<br>Password";
+   }
+   if ($("#passwordConfirm").val() == "") {
+      fieldsMissing += "<br>ConfirmPassword";
+   }
+   if (fieldsMissing != "") {
+      errorMessage += "<p>The following field(s) are missing" + fieldsMissing;
+   }
+
+   if (isEmail($("#email").val()) == false) {
+      errorMessage +="<p> your email is not valid </p>";
+   }
+   if ($.isNumeric($("#phone").val()) == false) {
+      errorMessage += "<p>Your phone number is not correct</p>";
+   }
+   if ($("#password").val() != $("#passwordConfirm").val()) {
+      errorMessage += "your password doesnt match"
+   }
+   if (errorMessage != "") {
+      $("#errorMessage").html(errorMessage);
+   }else{
+      $("#successMessage").show();
+      $("#errorMessage").hide();
+   }
+});
+
+</script>
+</body>
+</html>
+
+        
